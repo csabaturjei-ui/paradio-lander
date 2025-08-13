@@ -37,12 +37,6 @@ code {
         --input: 124 30% 15%;
         --ring: 124 100% 54%;
         --radius: 0.5rem;
-        
-        /* Custom P.A.R. colors */
-        --par-green: 124 100% 54%;
-        --par-green-bright: 124 100% 65%;
-        --par-green-light: 124 80% 60%;
-        --par-green-dim: 124 60% 40%;
     }
 }
 
