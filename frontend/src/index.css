@@ -1,80 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono:wght@400&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
+    font-family: 'Share Tech Mono', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #0a0a0a;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
+    font-family: 'Share Tech Mono', monospace;
 }
-
-
 
 @layer base {
   :root {
-        --background: 0 0% 100%;
-        --foreground: 0 0% 3.9%;
-        --card: 0 0% 100%;
-        --card-foreground: 0 0% 3.9%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 0 0% 3.9%;
-        --primary: 0 0% 9%;
-        --primary-foreground: 0 0% 98%;
-        --secondary: 0 0% 96.1%;
-        --secondary-foreground: 0 0% 9%;
-        --muted: 0 0% 96.1%;
-        --muted-foreground: 0 0% 45.1%;
-        --accent: 0 0% 96.1%;
-        --accent-foreground: 0 0% 9%;
+        --background: 0 0% 4%;
+        --foreground: 124 100% 54%;
+        --card: 0 0% 6%;
+        --card-foreground: 124 100% 54%;
+        --popover: 0 0% 4%;
+        --popover-foreground: 124 100% 54%;
+        --primary: 124 100% 54%;
+        --primary-foreground: 0 0% 0%;
+        --secondary: 0 0% 9%;
+        --secondary-foreground: 124 100% 54%;
+        --muted: 0 0% 9%;
+        --muted-foreground: 124 60% 40%;
+        --accent: 0 0% 9%;
+        --accent-foreground: 124 100% 54%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 89.8%;
-        --input: 0 0% 89.8%;
-        --ring: 0 0% 3.9%;
-        --chart-1: 12 76% 61%;
-        --chart-2: 173 58% 39%;
-        --chart-3: 197 37% 24%;
-        --chart-4: 43 74% 66%;
-        --chart-5: 27 87% 67%;
+        --border: 124 30% 25%;
+        --input: 124 30% 15%;
+        --ring: 124 100% 54%;
         --radius: 0.5rem;
-    }
-  .dark {
-        --background: 0 0% 3.9%;
-        --foreground: 0 0% 98%;
-        --card: 0 0% 3.9%;
-        --card-foreground: 0 0% 98%;
-        --popover: 0 0% 3.9%;
-        --popover-foreground: 0 0% 98%;
-        --primary: 0 0% 98%;
-        --primary-foreground: 0 0% 9%;
-        --secondary: 0 0% 14.9%;
-        --secondary-foreground: 0 0% 98%;
-        --muted: 0 0% 14.9%;
-        --muted-foreground: 0 0% 63.9%;
-        --accent: 0 0% 14.9%;
-        --accent-foreground: 0 0% 98%;
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 14.9%;
-        --input: 0 0% 14.9%;
-        --ring: 0 0% 83.1%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
+        
+        /* Custom P.A.R. colors */
+        --par-green: 124 100% 54%;
+        --par-green-bright: 124 100% 65%;
+        --par-green-light: 124 80% 60%;
+        --par-green-dim: 124 60% 40%;
     }
 }
-
-
 
 @layer base {
   * {
@@ -83,4 +53,105 @@ code {
   body {
     @apply bg-background text-foreground;
     }
+}
+
+@layer utilities {
+  /* Typography */
+  .font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .font-tech {
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* Colors */
+  .text-par-green {
+    color: hsl(var(--par-green));
+  }
+  
+  .text-par-green-bright {
+    color: hsl(var(--par-green-bright));
+  }
+  
+  .text-par-green-light {
+    color: hsl(var(--par-green-light));
+  }
+  
+  .text-par-green-dim {
+    color: hsl(var(--par-green-dim));
+  }
+
+  /* Text effects */
+  .text-shadow-glow {
+    text-shadow: 0 0 10px hsl(var(--par-green)), 0 0 20px hsl(var(--par-green)), 0 0 30px hsl(var(--par-green));
+  }
+
+  /* Cards */
+  .par-card {
+    @apply bg-card border border-par-green/30 rounded-lg backdrop-blur-sm;
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(15, 15, 15, 0.9) 100%);
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  /* Buttons */
+  .par-button {
+    @apply bg-par-green text-black hover:bg-par-green-bright font-orbitron font-bold transition-all duration-300;
+    @apply hover:shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:scale-105;
+  }
+  
+  .par-button-outline {
+    @apply border-par-green text-par-green hover:bg-par-green hover:text-black font-orbitron font-bold transition-all duration-300;
+    @apply hover:shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:scale-105;
+  }
+
+  /* Inputs */
+  .par-input {
+    @apply bg-input border-par-green/30 text-par-green placeholder:text-par-green-dim font-tech;
+    @apply focus:border-par-green focus:ring-par-green focus:shadow-[0_0_10px_rgba(57,255,20,0.2)];
+  }
+
+  /* Shadows */
+  .shadow-par-glow {
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.3), 0 0 40px rgba(57, 255, 20, 0.1);
+  }
+}
+
+@layer components {
+  /* Animations */
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(57, 255, 20, 0.6), 0 0 40px rgba(57, 255, 20, 0.3);
+    }
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--par-green));
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--par-green-bright));
+  }
 }

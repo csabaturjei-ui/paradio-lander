@@ -1,34 +1,50 @@
+/* Reset default App.css styles for cyberpunk theme */
+.App {
+  text-align: left; /* Override center alignment for natural reading flow */
+}
+
 .App-logo {
-    height: 40vmin;
-    pointer-events: none;
+  height: 40vmin;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 .App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+  background-color: #0a0a0a; /* P.A.R. black background */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #39FF14; /* P.A.R. green */
 }
 
 .App-link {
-    color: #61dafb;
+  color: #39FF14; /* P.A.R. green instead of default blue */
 }
 
 @keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom selection colors for P.A.R. theme */
+::selection {
+  background-color: rgba(57, 255, 20, 0.3);
+  color: #39FF14;
+}
+
+::-moz-selection {
+  background-color: rgba(57, 255, 20, 0.3);
+  color: #39FF14;
 }
