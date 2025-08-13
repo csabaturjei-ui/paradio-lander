@@ -61,30 +61,40 @@ code {
 
   /* Colors */
   .text-par-green {
-    color: hsl(var(--par-green));
+    color: #39FF14;
   }
   
   .text-par-green-bright {
-    color: hsl(var(--par-green-bright));
+    color: #4AFF25;
   }
   
   .text-par-green-light {
-    color: hsl(var(--par-green-light));
+    color: #66FF42;
   }
   
   .text-par-green-dim {
-    color: hsl(var(--par-green-dim));
+    color: #299912;
+  }
+
+  .bg-par-green {
+    background-color: #39FF14;
+  }
+
+  .border-par-green {
+    border-color: #39FF14;
   }
 
   /* Text effects */
   .text-shadow-glow {
-    text-shadow: 0 0 10px hsl(var(--par-green)), 0 0 20px hsl(var(--par-green)), 0 0 30px hsl(var(--par-green));
+    text-shadow: 0 0 10px #39FF14, 0 0 20px #39FF14, 0 0 30px #39FF14;
   }
 
   /* Cards */
   .par-card {
-    @apply bg-card border border-par-green/30 rounded-lg backdrop-blur-sm;
     background: linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(15, 15, 15, 0.9) 100%);
+    border: 1px solid rgba(57, 255, 20, 0.3);
+    border-radius: 0.5rem;
+    backdrop-filter: blur(4px);
     animation: fadeInUp 0.6s ease-out forwards;
     opacity: 0;
     transform: translateY(20px);
@@ -92,19 +102,50 @@ code {
 
   /* Buttons */
   .par-button {
-    @apply bg-par-green text-black hover:bg-par-green-bright font-orbitron font-bold transition-all duration-300;
-    @apply hover:shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:scale-105;
+    background-color: #39FF14;
+    color: #000000;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .par-button:hover {
+    background-color: #4AFF25;
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+    transform: scale(1.05);
   }
   
   .par-button-outline {
-    @apply border-par-green text-par-green hover:bg-par-green hover:text-black font-orbitron font-bold transition-all duration-300;
-    @apply hover:shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:scale-105;
+    border: 1px solid #39FF14;
+    color: #39FF14;
+    background-color: transparent;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .par-button-outline:hover {
+    background-color: #39FF14;
+    color: #000000;
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+    transform: scale(1.05);
   }
 
   /* Inputs */
   .par-input {
-    @apply bg-input border-par-green/30 text-par-green placeholder:text-par-green-dim font-tech;
-    @apply focus:border-par-green focus:ring-par-green focus:shadow-[0_0_10px_rgba(57,255,20,0.2)];
+    background-color: rgba(57, 255, 20, 0.1);
+    border: 1px solid rgba(57, 255, 20, 0.3);
+    color: #39FF14;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  
+  .par-input::placeholder {
+    color: rgba(57, 255, 20, 0.6);
+  }
+  
+  .par-input:focus {
+    border-color: #39FF14;
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
   }
 
   /* Shadows */
