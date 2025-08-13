@@ -48,6 +48,7 @@ export const features = [
 
 export const socialLinks = [
   { name: 'Twitter', icon: 'Twitter', url: '#' },
+  { name: 'TikTok', icon: 'Music', url: '#' },
   { name: 'Discord', icon: 'MessageCircle', url: '#' },
   { name: 'Instagram', icon: 'Instagram', url: '#' },
   { name: 'GitHub', icon: 'Github', url: '#' }
