@@ -17,7 +17,11 @@ import {
   Heart,
   ArrowRight
 } from 'lucide-react';
-import { features, socialLinks, kofiUrl, mockEmailSignup } from '../mock';
+import { features, socialLinks, kofiUrl } from '../mock';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const iconMap = {
   Music,
@@ -49,17 +53,26 @@ const LandingPage = () => {
 
     setIsSubmitting(true);
     try {
-      const result = await mockEmailSignup(email);
-      toast({
-        title: "Success!",
-        description: result.message,
-        variant: "default"
-      });
-      setEmail('');
+      const response = await axios.post(`${API}/signup`, { email });
+      
+      if (response.data.success) {
+        toast({
+          title: "Success!",
+          description: response.data.message,
+          variant: "default"
+        });
+        setEmail('');
+      } else {
+        throw new Error('Signup failed');
+      }
     } catch (error) {
+      const errorMessage = error.response?.data?.detail || 
+                          error.response?.data?.message || 
+                          "Failed to join waitlist. Please try again.";
+      
       toast({
         title: "Error",
-        description: "Failed to join waitlist. Please try again.",
+        description: errorMessage,
         variant: "destructive"
       });
     } finally {
