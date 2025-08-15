@@ -12,22 +12,19 @@ logger = logging.getLogger(__name__)
 class GoogleSheetsService:
     def __init__(self):
         self.sheet_id = os.environ.get('GOOGLE_SHEET_ID')
-        self.service_account_json = os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON')
+        self.service_account_file = os.environ.get('GOOGLE_SERVICE_ACCOUNT_FILE')
         self.service = None
         self._initialize_service()
     
     def _initialize_service(self):
         """Initialize the Google Sheets API service"""
         try:
-            if not self.service_account_json or not self.sheet_id:
+            if not self.service_account_file or not self.sheet_id:
                 raise ValueError("Missing Google Sheets credentials or sheet ID")
             
-            # Parse the JSON credentials
-            creds_dict = json.loads(self.service_account_json)
-            
-            # Create credentials from the service account info
-            creds = service_account.Credentials.from_service_account_info(
-                creds_dict,
+            # Create credentials from the service account file
+            creds = service_account.Credentials.from_service_account_file(
+                self.service_account_file,
                 scopes=['https://www.googleapis.com/auth/spreadsheets']
             )
             
