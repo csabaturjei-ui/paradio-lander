@@ -47,11 +47,10 @@ export const features = [
 ];
 
 export const socialLinks = [
-  { name: 'Twitter', icon: 'Twitter', url: '#' },
-  { name: 'TikTok', icon: 'Music', url: '#' },
-  { name: 'Discord', icon: 'MessageCircle', url: '#' },
-  { name: 'Instagram', icon: 'Instagram', url: '#' },
-  { name: 'GitHub', icon: 'Github', url: '#' }
+  { name: 'Twitter', icon: 'Twitter', url: 'https://x.com/postapradio' },
+  { name: 'TikTok', icon: 'Music', url: 'https://tiktok.com/@postapradio' },
+  { name: 'Discord', icon: 'MessageCircle', url: 'https://discord.gg/f2M7tuVe' },
+  { name: 'Instagram', icon: 'Instagram', url: 'https://instagram.com/postapocalypticradio' }
 ];
 
-export const kofiUrl = 'https://ko-fi.com/placeholder'; // User will replace with actual Ko-fi URL
+export const kofiUrl = 'https://ko-fi.com/postapocalypticradio';
