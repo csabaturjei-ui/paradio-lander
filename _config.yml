@@ -1,0 +1,44 @@
+# Jekyll configuration for GitHub Pages
+# Gives /vs/spotify, /vs/soundcloud, /alternatives/bandcamp without .html extensions
+# Directory-based index.html files are already served cleanly by GitHub Pages;
+# this config ensures Jekyll doesn't interfere with the compiled React assets.
+
+title: Post Apocalyptic Radio
+description: Decentralized music streaming — 0% cut, community-curated, built on Solana and IPFS
+url: https://postapocalypticradio.com
+baseurl: ""
+
+# Clean URLs — directory index.html files already provide this
+permalink: pretty
+
+# Keep Jekyll from trying to process the React build artifacts
+exclude:
+  - backend/
+  - tests/
+  - Dockerfile
+  - requirements.txt
+  - contracts.md
+  - test_result.md
+  - yarn.lock
+  - README.md
+  - asset-manifest.json
+  - .gitconfig
+  - .emergent/
+  - node_modules/
+
+# Pass static JS/CSS through untouched
+keep_files:
+  - static
+
+# Disable Jekyll themes — we use our own compiled CSS
+theme: ~
+
+# Encoding
+encoding: utf-8
+
+# Don't show drafts
+show_drafts: false
+
+# Plugins available on GitHub Pages (gh-pages safe-list only)
+plugins:
+  - jekyll-seo-tag

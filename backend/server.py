@@ -11,9 +11,64 @@ from typing import List
 import uuid
 from datetime import datetime
 from google_sheets_service import sheets_service
+import resend
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
+
+# Resend — requires postapocalypticradio.com to be verified in the Resend dashboard
+RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '')
+FROM_ADDRESS = 'P.A.R. <hello@postapocalypticradio.com>'
+NOTIFY_ADDRESS = 'hello@postapocalypticradio.com'
+
+CONFIRMATION_HTML = """
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="background:#0a0a0a;margin:0;padding:40px 20px;font-family:'Courier New',monospace;">
+  <div style="max-width:480px;margin:0 auto;background:#0f0f0f;border:1px solid rgba(57,255,20,0.3);border-radius:8px;padding:40px;">
+    <p style="font-size:11px;letter-spacing:0.15em;color:#29a331;margin:0 0 24px;text-transform:uppercase;">Post Apocalyptic Radio</p>
+    <h1 style="font-size:22px;color:#39ff14;margin:0 0 20px;line-height:1.2;">📡 Signal Received</h1>
+    <p style="color:#29a331;line-height:1.7;font-size:14px;margin:0 0 16px;">
+      You're on the waitlist. We're building the first decentralized music streaming platform —
+      <span style="color:#39ff14;">0% cut to artists</span>, community-curated playlists,
+      IPFS storage, and instant Solana payments.
+    </p>
+    <p style="color:#29a331;line-height:1.7;font-size:14px;margin:0 0 32px;">
+      We'll reach out when beta access opens.
+    </p>
+    <div style="border-top:1px solid rgba(57,255,20,0.2);padding-top:20px;">
+      <p style="color:#29a331;font-size:12px;margin:0;">
+        Post Apocalyptic Radio &middot;
+        <a href="https://postapocalypticradio.com" style="color:#39ff14;text-decoration:none;">postapocalypticradio.com</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
+"""
+
+def send_signup_emails(email: str) -> None:
+    """Send confirmation to the user and notification to the owner. Best-effort — never raises."""
+    if not RESEND_API_KEY:
+        logger.warning("RESEND_API_KEY not set — skipping email send")
+        return
+    resend.api_key = RESEND_API_KEY
+    try:
+        resend.Emails.send({
+            "from": FROM_ADDRESS,
+            "to": [email],
+            "subject": "📡 You're on the P.A.R. waitlist",
+            "html": CONFIRMATION_HTML,
+        })
+        resend.Emails.send({
+            "from": FROM_ADDRESS,
+            "to": [NOTIFY_ADDRESS],
+            "subject": f"New P.A.R. signup: {email}",
+            "html": f'<p style="font-family:monospace;">New waitlist signup: <strong>{email}</strong></p>',
+        })
+    except Exception as e:
+        logger.error(f"Resend error for {email}: {e}")
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
@@ -75,6 +130,7 @@ async def create_signup(signup: EmailSignup):
         success = sheets_service.add_signup(signup.email)
         
         if success:
+            send_signup_emails(signup.email)
             return SignupResponse(
                 success=True,
                 message="Successfully joined the waitlist!"
