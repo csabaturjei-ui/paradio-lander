@@ -8,12 +8,13 @@
 {% endcomment %}
 
 {% assign fid = include.form_id | default: 'par-form' %}
-{% assign fixed_role = include.role %}
+{% assign fixed_role = include.role | default: '' %}
 {% assign show_selector = include.show_role_selector | default: false %}
 {% assign btn_label = include.submit_label | default: 'Join the Waitlist' %}
+{% assign form_source = include.source | default: '' %}
 
-<form id="{{ fid }}" class="par-signup-form" data-role="{{ fixed_role }}" style="display:flex; flex-direction:column; gap:0.625rem; max-width:22rem; margin:0 auto;">
-  {% if show_selector and fixed_role == nil %}
+<form id="{{ fid }}" class="par-signup-form" data-role="{{ fixed_role }}" data-source="{{ form_source }}" style="display:flex; flex-direction:column; gap:0.625rem; max-width:22rem; margin:0 auto;">
+  {% if show_selector and fixed_role == '' %}
   <div id="{{ fid }}-roles" style="display:flex; gap:0.5rem; justify-content:center; margin-bottom:0.25rem;">
     <button type="button" class="role-pill active" data-role="artist">I'm an artist</button>
     <button type="button" class="role-pill" data-role="fan">I'm a fan</button>

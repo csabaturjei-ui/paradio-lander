@@ -8,7 +8,10 @@ description: Decentralized music streaming — 0% cut, community-curated, built 
 url: https://postapocalypticradio.com
 baseurl: ""
 
-# Signup API — placeholder until api.postapocalypticradio.com is deployed (Phase 2/4)
+# Canonical host — apex, not www (see docs/DEPLOY.md for www redirect at DNS)
+canonical_host: postapocalypticradio.com
+
+# Signup API — placeholder backend on api. subdomain (Mailjet wired in Phase 4)
 signup_api_url: https://api.postapocalypticradio.com/api/signup
 
 social_links:
@@ -45,6 +48,10 @@ exclude:
   - .gitconfig
   - .emergent/
   - node_modules/
+  - frontend/
+  - docs/
+  - Gemfile
+  - Gemfile.lock
 
 # Pass static JS/CSS through untouched
 keep_files:

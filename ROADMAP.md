@@ -15,7 +15,7 @@
 | 1 | Blog | **Markdown** via Jekyll (`_posts/`) |
 | 2 | SEO page CTA | **Hybrid** — email + Artist/Fan selector on page; links to deep pages |
 | 3 | Homepage bottom | **Two paths** — “I am an artist” / “I am a music fan” (no form on home) |
-| 4 | Hosting | **GitHub Pages** on `postapocalypticradio.com` |
+| 4 | Hosting | **GitHub Pages** on `postapocalypticradio.com` (apex canonical; www redirects at DNS) |
 | 5 | Stack | **Static HTML + Jekyll** — **no React** |
 | 6 | Email tool | **Mailjet Starter ($9/mo)** — see [Email (Mailjet)](#email-mailjet) |
 | 7 | Emergent cleanup | **Delete all references** — Phase 5 only, not before static site is live |
@@ -131,11 +131,11 @@ Form (any page)
 
 ### Phase 2 — SEO + go live
 
-- [ ] Update SEO pages with **hybrid CTA** (email + role selector)
-- [ ] Replace live old static site with this repo on GitHub Pages
-- [ ] Canonical domain (`www` vs apex) + redirects aligned
-- [ ] Cross-links: home ↔ SEO ↔ persona pages
-- [ ] Point forms at placeholder backend on `api.` subdomain (Mailjet wired in Phase 4)
+- [x] Update SEO pages with **hybrid CTA** (email + role selector)
+- [x] Replace live old static site with this repo on GitHub Pages
+- [x] Canonical domain (`www` vs apex) + redirects aligned
+- [x] Cross-links: home ↔ SEO ↔ persona pages
+- [x] Point forms at placeholder backend on `api.` subdomain (Mailjet wired in Phase 4)
 
 ### Phase 3 — Blog
 
@@ -178,7 +178,6 @@ Form (any page)
 
 ## Still open (minor)
 
-- **Canonical host:** `www` vs apex (pick one and redirect)
 - **First blog topics:** draft when Phase 3 starts
 - **Google Sheets backup:** keep or drop after Mailjet is live
 
@@ -198,7 +197,7 @@ Form (any page)
 
 From code review before this roadmap:
 
-- SEO pages use placeholder `YOUR_BACKEND_URL` — forms non-functional until backend URL is set
+- SEO pages use placeholder `YOUR_BACKEND_URL` — **fixed in Phase 2** (now `api.postapocalypticradio.com`)
 - Production React bundle pointed at expired Emergent preview backend (404)
 - Live site at `postapocalypticradio.com` is an older static page, not this repo
 - Backend `server.py` has `logger` used before definition; root `Dockerfile` path/requirements need fixes before deploy

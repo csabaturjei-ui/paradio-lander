@@ -1,0 +1,18 @@
+<section id="signup" style="padding:5.5rem 1.5rem; text-align:center; position:relative; overflow:hidden;">
+  <div class="glow-bg" style="width:500px; height:350px;"></div>
+  <div style="max-width:38rem; margin:0 auto; position:relative;">
+    <h2 class="font-orbitron text-shadow-glow" style="font-size:clamp(1.4rem,4vw,2.25rem); font-weight:900; color:#39ff14; margin-bottom:1rem;">
+      {{ page.cta_heading }}
+    </h2>
+    <p class="font-tech" style="color:#29a331; margin-bottom:2rem; font-size:0.95rem; line-height:1.75;">
+      {{ page.cta_body }}
+    </p>
+    {% include signup-form.html form_id="seo-form" show_role_selector=true source=page.signup_source %}
+    <p class="font-tech" style="color:#29a331; margin-top:1.25rem; font-size:0.8rem; line-height:1.6;">
+      <a href="/for-artists" class="nav-a" style="opacity:1;">For artists</a>
+      <span style="opacity:0.5;"> · </span>
+      <a href="/for-fans" class="nav-a" style="opacity:1;">For fans</a>
+    </p>
+    <p class="font-tech" style="color:#29a331; margin-top:0.75rem; font-size:0.75rem; opacity:0.6;">Beta access — artists and early listeners welcome</p>
+  </div>
+</section>

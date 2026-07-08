@@ -6,9 +6,9 @@
     <div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
       <a href="/for-artists" class="nav-a{% if page.nav_active == 'artists' %} active{% endif %}">For Artists</a>
       <a href="/for-fans" class="nav-a{% if page.nav_active == 'fans' %} active{% endif %}">For Fans</a>
-      <a href="/vs/spotify" class="nav-a">vs Spotify</a>
-      <a href="/vs/soundcloud" class="nav-a">vs SoundCloud</a>
-      <a href="/alternatives/bandcamp" class="nav-a">vs Bandcamp</a>
+      <a href="/vs/spotify" class="nav-a{% if page.seo_active == 'spotify' %} active{% endif %}">vs Spotify</a>
+      <a href="/vs/soundcloud" class="nav-a{% if page.seo_active == 'soundcloud' %} active{% endif %}">vs SoundCloud</a>
+      <a href="/alternatives/bandcamp" class="nav-a{% if page.seo_active == 'bandcamp' %} active{% endif %}">vs Bandcamp</a>
     </div>
   </div>
 </nav>

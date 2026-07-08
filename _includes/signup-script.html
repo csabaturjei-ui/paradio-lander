@@ -9,6 +9,7 @@
     var msgEl = document.getElementById(formId + '-msg');
     var rolesEl = document.getElementById(formId + '-roles');
     var fixedRole = form.getAttribute('data-role') || '';
+    var formSource = form.getAttribute('data-source') || '';
     var selectedRole = fixedRole || 'artist';
 
     if (rolesEl) {
@@ -34,7 +35,10 @@
         var res = await fetch(API, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, role: selectedRole })
+          body: JSON.stringify(Object.assign(
+            { email: email, role: selectedRole },
+            formSource ? { source: formSource } : {}
+          ))
         });
         var data = await res.json();
         if (res.ok && data.success) {
