@@ -1,0 +1,27 @@
+{% comment %}
+  Signup form include
+  Parameters (via page or include):
+    - form_id: unique form id (required)
+    - role: fixed role "artist" | "fan" | nil for selector mode
+    - show_role_selector: true/false (default false when role is set)
+    - submit_label: button text
+{% endcomment %}
+
+{% assign fid = include.form_id | default: 'par-form' %}
+{% assign fixed_role = include.role %}
+{% assign show_selector = include.show_role_selector | default: false %}
+{% assign btn_label = include.submit_label | default: 'Join the Waitlist' %}
+
+<form id="{{ fid }}" class="par-signup-form" data-role="{{ fixed_role }}" style="display:flex; flex-direction:column; gap:0.625rem; max-width:22rem; margin:0 auto;">
+  {% if show_selector and fixed_role == nil %}
+  <div id="{{ fid }}-roles" style="display:flex; gap:0.5rem; justify-content:center; margin-bottom:0.25rem;">
+    <button type="button" class="role-pill active" data-role="artist">I'm an artist</button>
+    <button type="button" class="role-pill" data-role="fan">I'm a fan</button>
+  </div>
+  {% endif %}
+  <input id="{{ fid }}-email" type="email" required placeholder="your@email.com" class="par-input" style="padding:0.75rem 1rem; border-radius:0.375rem; font-size:0.9rem; width:100%; box-sizing:border-box;" aria-label="Email address">
+  <button type="submit" id="{{ fid }}-btn" class="par-button" style="padding:0.875rem; border-radius:0.375rem; cursor:pointer; border:none; width:100%; font-size:0.9rem;">
+    {{ btn_label }}
+  </button>
+</form>
+<div id="{{ fid }}-msg" style="display:none; font-family:'Share Tech Mono',monospace; font-size:0.875rem; margin-top:0.5rem; text-align:center;"></div>

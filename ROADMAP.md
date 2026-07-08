@@ -123,11 +123,11 @@ Form (any page)
 
 ### Phase 1 — Static core
 
-- [ ] Rebuild **home** as static HTML (no React)
-- [ ] Bottom CTA: **I am an artist** / **I am a music fan** → respective pages
-- [ ] Build **`/for-artists`** and **`/for-fans`** (copy, onboarding steps, email form)
-- [ ] Shared **`_includes`**: nav, footer, social links, form snippet
-- [ ] Placeholder form submit (email + role stored/logged; user sees thank-you)
+- [x] Rebuild **home** as static HTML (no React)
+- [x] Bottom CTA: **I am an artist** / **I am a music fan** → respective pages
+- [x] Build **`/for-artists`** and **`/for-fans`** (copy, onboarding steps, email form)
+- [x] Shared **`_includes`**: nav, footer, social links, form snippet
+- [x] Placeholder form submit (email + role stored/logged; user sees thank-you)
 
 ### Phase 2 — SEO + go live
 

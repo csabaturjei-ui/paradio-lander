@@ -8,6 +8,26 @@ description: Decentralized music streaming — 0% cut, community-curated, built 
 url: https://postapocalypticradio.com
 baseurl: ""
 
+# Signup API — placeholder until api.postapocalypticradio.com is deployed (Phase 2/4)
+signup_api_url: https://api.postapocalypticradio.com/api/signup
+
+social_links:
+  - name: X (Twitter)
+    icon: x
+    url: https://x.com/postapradio
+  - name: TikTok
+    icon: tiktok
+    url: https://tiktok.com/@postapradio
+  - name: Discord
+    icon: discord
+    url: https://discord.gg/f2M7tuVe
+  - name: Instagram
+    icon: instagram
+    url: https://instagram.com/postapocalypticradio
+  - name: Ko-fi
+    icon: kofi
+    url: https://ko-fi.com/postapocalypticradio
+
 # Clean URLs — directory index.html files already provide this
 permalink: pretty
 

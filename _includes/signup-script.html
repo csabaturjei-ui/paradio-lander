@@ -1,0 +1,62 @@
+<script>
+(function(){
+  var API = '{{ site.signup_api_url }}';
+
+  function initForm(form) {
+    var formId = form.id;
+    var emailEl = document.getElementById(formId + '-email');
+    var btnEl = document.getElementById(formId + '-btn');
+    var msgEl = document.getElementById(formId + '-msg');
+    var rolesEl = document.getElementById(formId + '-roles');
+    var fixedRole = form.getAttribute('data-role') || '';
+    var selectedRole = fixedRole || 'artist';
+
+    if (rolesEl) {
+      rolesEl.querySelectorAll('.role-pill').forEach(function(pill) {
+        pill.addEventListener('click', function() {
+          rolesEl.querySelectorAll('.role-pill').forEach(function(p) { p.classList.remove('active'); });
+          pill.classList.add('active');
+          selectedRole = pill.getAttribute('data-role');
+        });
+      });
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var email = emailEl.value.trim();
+      if (!email) return;
+
+      btnEl.disabled = true;
+      btnEl.textContent = 'Sending...';
+      msgEl.style.display = 'none';
+
+      try {
+        var res = await fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, role: selectedRole })
+        });
+        var data = await res.json();
+        if (res.ok && data.success) {
+          form.style.display = 'none';
+          msgEl.style.display = 'block';
+          msgEl.style.color = '#39ff14';
+          msgEl.textContent = '📡 Signal received — you\u2019re on the list.';
+        } else {
+          throw new Error(data.detail || data.error || 'Something went wrong.');
+        }
+      } catch (err) {
+        msgEl.style.display = 'block';
+        msgEl.style.color = '#ef4444';
+        msgEl.textContent = err.message || 'Failed to join. Please try again.';
+        btnEl.disabled = false;
+        btnEl.textContent = btnEl.getAttribute('data-label') || 'Join the Waitlist';
+      }
+    });
+
+    btnEl.setAttribute('data-label', btnEl.textContent);
+  }
+
+  document.querySelectorAll('.par-signup-form').forEach(initForm);
+})();
+</script>

@@ -7,7 +7,7 @@ import logging
 import re
 from pathlib import Path
 from pydantic import BaseModel, Field, validator
-from typing import List
+from typing import List, Literal, Optional
 import uuid
 from datetime import datetime
 from google_sheets_service import sheets_service
@@ -15,6 +15,13 @@ import resend
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
+
+# Configure logging early — used by send_signup_emails and routes
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 # Resend — requires postapocalypticradio.com to be verified in the Resend dashboard
 RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '')
@@ -92,6 +99,8 @@ class StatusCheckCreate(BaseModel):
 
 class EmailSignup(BaseModel):
     email: str
+    role: Optional[Literal['artist', 'fan']] = 'fan'
+    source: Optional[str] = None
     
     @validator('email')
     def validate_email(cls, v):
@@ -126,8 +135,9 @@ async def get_status_checks():
 @api_router.post("/signup", response_model=SignupResponse)
 async def create_signup(signup: EmailSignup):
     try:
+        source = signup.source or f"P.A.R. Landing Page ({signup.role})"
         # Add to Google Sheets
-        success = sheets_service.add_signup(signup.email)
+        success = sheets_service.add_signup(signup.email, role=signup.role, source=source)
         
         if success:
             send_signup_emails(signup.email)
@@ -164,13 +174,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
 
 @app.on_event("startup")
 async def startup_event():

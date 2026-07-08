@@ -1,0 +1,14 @@
+<nav style="border-bottom:1px solid rgba(57,255,20,0.18); background:rgba(10,10,10,0.96); backdrop-filter:blur(10px); position:sticky; top:0; z-index:50;">
+  <div style="max-width:72rem; margin:0 auto; padding:0.875rem 1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.75rem;">
+    <a href="/" style="text-decoration:none;">
+      <span class="font-orbitron text-shadow-glow" style="font-size:1rem; font-weight:900; color:#39ff14; letter-spacing:0.08em;">P.A.R.</span>
+    </a>
+    <div style="display:flex; gap:1.25rem; align-items:center; flex-wrap:wrap;">
+      <a href="/for-artists" class="nav-a{% if page.nav_active == 'artists' %} active{% endif %}">For Artists</a>
+      <a href="/for-fans" class="nav-a{% if page.nav_active == 'fans' %} active{% endif %}">For Fans</a>
+      <a href="/vs/spotify" class="nav-a">vs Spotify</a>
+      <a href="/vs/soundcloud" class="nav-a">vs SoundCloud</a>
+      <a href="/alternatives/bandcamp" class="nav-a">vs Bandcamp</a>
+    </div>
+  </div>
+</nav>

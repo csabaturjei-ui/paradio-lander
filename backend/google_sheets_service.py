@@ -49,7 +49,7 @@ class GoogleSheetsService:
             logger.error(f"Failed to initialize Google Sheets service: {str(e)}")
             raise
     
-    def add_signup(self, email: str) -> bool:
+    def add_signup(self, email: str, role: str = "fan", source: str = "P.A.R. Landing Page") -> bool:
         """Add a new signup to the Google Sheet"""
         try:
             self._initialize_service()
@@ -59,10 +59,9 @@ class GoogleSheetsService:
             
             # Prepare the data
             timestamp = datetime.utcnow().isoformat() + 'Z'
-            source = "P.A.R. Landing Page"
             
-            # Data to append
-            values = [[email, timestamp, source]]
+            # Data to append: Email, Timestamp, Source, Role
+            values = [[email, timestamp, source, role]]
             
             # Prepare the request
             body = {
@@ -72,13 +71,13 @@ class GoogleSheetsService:
             # Execute the request
             result = self.service.spreadsheets().values().append(
                 spreadsheetId=self.sheet_id,
-                range='Signups!A:C',  # Append to columns A, B, C
+                range='Signups!A:D',  # Append to columns A, B, C, D
                 valueInputOption='RAW',
                 insertDataOption='INSERT_ROWS',
                 body=body
             ).execute()
             
-            logger.info(f"Successfully added signup: {email}")
+            logger.info(f"Successfully added signup: {email} (role={role})")
             return True
             
         except HttpError as e:
@@ -99,19 +98,20 @@ class GoogleSheetsService:
             # Check if headers already exist
             result = self.service.spreadsheets().values().get(
                 spreadsheetId=self.sheet_id,
-                range='Signups!A1:C1'
+                range='Signups!A1:D1'
             ).execute()
             
             values = result.get('values', [])
+            expected_headers = ['Email', 'Timestamp', 'Source', 'Role']
             
             # If no headers or incorrect headers, add them
-            if not values or values[0] != ['Email', 'Timestamp', 'Source']:
-                headers = [['Email', 'Timestamp', 'Source']]
+            if not values or values[0] != expected_headers:
+                headers = [expected_headers]
                 body = {'values': headers}
                 
                 self.service.spreadsheets().values().update(
                     spreadsheetId=self.sheet_id,
-                    range='Signups!A1:C1',
+                    range='Signups!A1:D1',
                     valueInputOption='RAW',
                     body=body
                 ).execute()
