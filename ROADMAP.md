@@ -1,5 +1,25 @@
 # Post Apocalyptic Radio — Site Roadmap
 
+## ⚠️ Wrong repository — read first
+
+**Mistake (Jul 2026):** Phases 1 and 2 of this roadmap were implemented in **`csabaturjei-ui/paradio-lander`** (this repo). That is **not** the intended target repository for the Post Apocalyptic Radio marketing site.
+
+| | |
+|---|---|
+| **This repo** | `paradio-lander` — Emergent/React lander prototype; Phase 1–2 work landed here by error |
+| **Target** | The **correct repo** (to be opened in a separate agent session) — where the live site and future phases should be built |
+
+**What to do in the correct repo:**
+
+1. **Copy this entire `ROADMAP.md`** into the target repo (or treat this file as the spec).
+2. **Do not assume Phases 1–2 are done** on the real project unless you port or re-implement the work there.
+3. Phase 1–2 checkboxes below are marked `[x]` to record what was built **here** as a reference implementation — not as completion of the production site.
+4. DNS / GitHub Pages / `postapocalypticradio.com` changes made from this repo may need to be reversed or pointed at the correct repo once identified.
+
+**Reference only (this repo):** static Jekyll home, `/for-artists`, `/for-fans`, SEO hybrid CTAs, shared `_includes`, backend `role` field, `CNAME`, GitHub Actions Pages workflow, `docs/DEPLOY.md`. Use as a blueprint when re-running Phases 1–2 in the right place.
+
+---
+
 ## North star
 
 **Purpose:** Capture emails (segmented by artist vs fan) and drive people to social channels.
@@ -123,6 +143,8 @@ Form (any page)
 
 ### Phase 1 — Static core
 
+> **Status in this repo:** `[x]` = built in `paradio-lander` (wrong repo). **Target repo:** treat as `[ ]` until re-implemented or ported.
+
 - [x] Rebuild **home** as static HTML (no React)
 - [x] Bottom CTA: **I am an artist** / **I am a music fan** → respective pages
 - [x] Build **`/for-artists`** and **`/for-fans`** (copy, onboarding steps, email form)
@@ -130,6 +152,8 @@ Form (any page)
 - [x] Placeholder form submit (email + role stored/logged; user sees thank-you)
 
 ### Phase 2 — SEO + go live
+
+> **Status in this repo:** `[x]` = built in `paradio-lander` (wrong repo). **Target repo:** treat as `[ ]` until re-implemented or ported.
 
 - [x] Update SEO pages with **hybrid CTA** (email + role selector)
 - [x] Replace live old static site with this repo on GitHub Pages
@@ -197,7 +221,8 @@ Form (any page)
 
 From code review before this roadmap:
 
-- SEO pages use placeholder `YOUR_BACKEND_URL` — **fixed in Phase 2** (now `api.postapocalypticradio.com`)
+- **Wrong repo:** Phase 1–2 implementation lives in `paradio-lander`, not the production site repo — see [Wrong repository](#️-wrong-repository--read-first)
+- SEO pages use placeholder `YOUR_BACKEND_URL` — **fixed in Phase 2 (this repo only)** (now `api.postapocalypticradio.com`)
 - Production React bundle pointed at expired Emergent preview backend (404)
 - Live site at `postapocalypticradio.com` is an older static page, not this repo
 - Backend `server.py` has `logger` used before definition; root `Dockerfile` path/requirements need fixes before deploy
